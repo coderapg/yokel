@@ -4,19 +4,22 @@
       <div slot="center">首页</div>
     </nav-bar>
     <home-swiper :bannerList="bannerList"/>
+    <home-recommend :recommendList="recommendList"/>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/NavBar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
+import HomeRecommend from './components/HomeRecommend'
 import { getHomeMultidata } from 'https/home'
 
 export default {
   name: 'Home',
   components: {
     NavBar,
-    HomeSwiper
+    HomeSwiper,
+    HomeRecommend
   },
   data () {
     return {
