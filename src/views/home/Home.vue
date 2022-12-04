@@ -8,11 +8,32 @@
 
 <script>
 import NavBar from 'components/common/NavBar/NavBar'
+import { getHomeMultidata } from 'https/home'
 
 export default {
   name: 'Home',
   components: {
     NavBar
+  },
+  data () {
+    return {
+      bannerList: [],
+      recommendList: []
+    }
+  },
+  created () {
+    this.getHomeBanners()
+  },
+  methods: {
+    getHomeBanners () {
+      getHomeMultidata().then(res => {
+        const { data: { banner, recommend }, success } = res
+        if (success) {
+          this.bannerList = banner.list
+          this.recommendList = recommend.list
+        }
+      })
+    }
   }
 }
 </script>
