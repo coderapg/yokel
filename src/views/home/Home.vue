@@ -5,6 +5,7 @@
     </nav-bar>
     <home-swiper :bannerList="bannerList"/>
     <home-recommend :recommendList="recommendList"/>
+    <home-popular />
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 import NavBar from 'components/common/NavBar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
 import HomeRecommend from './components/HomeRecommend'
+import HomePopular from './components/HomePopular'
 import { getHomeMultidata } from 'https/home'
 
 export default {
@@ -19,7 +21,8 @@ export default {
   components: {
     NavBar,
     HomeSwiper,
-    HomeRecommend
+    HomeRecommend,
+    HomePopular
   },
   data () {
     return {
