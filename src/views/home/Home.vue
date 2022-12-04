@@ -3,17 +3,20 @@
     <nav-bar class="nav-bar" initColor="#333333">
       <div slot="center">首页</div>
     </nav-bar>
+    <home-swiper :bannerList="bannerList"/>
   </div>
 </template>
 
 <script>
 import NavBar from 'components/common/NavBar/NavBar'
+import HomeSwiper from './components/HomeSwiper'
 import { getHomeMultidata } from 'https/home'
 
 export default {
   name: 'Home',
   components: {
-    NavBar
+    NavBar,
+    HomeSwiper
   },
   data () {
     return {
