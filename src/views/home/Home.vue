@@ -97,7 +97,6 @@ export default {
     },
     getHomeTabsData (type) {
       const page = this.homeGoods[type].page + 1
-      console.log('page===', page)
       getHomeTabsData(type, page).then(res => {
         const { data, success } = res
         if (success) {
