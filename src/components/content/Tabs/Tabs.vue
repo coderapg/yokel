@@ -31,6 +31,7 @@ export default {
   methods: {
     handleTabItemClick (index) {
       this.currIndex = index
+      this.$emit('handleTabItemClick', index)
     }
   }
 }

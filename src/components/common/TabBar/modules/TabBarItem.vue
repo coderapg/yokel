@@ -53,7 +53,7 @@ export default {
     font-size: 12px;
     img {
       width: 20px;
-      vertical-align: middle;
+      // vertical-align: middle;
     }
   }
 </style>

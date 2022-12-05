@@ -6,7 +6,8 @@
     <home-swiper :bannerList="bannerList"/>
     <home-recommend :recommendList="recommendList"/>
     <home-popular />
-    <tabs :controlList="['流行', '新款', '精选']"/>
+    <tabs :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick"/>
+    <goods-list :goodsList="activeGoods"/>
     <ul>
       <li>1</li>
       <li>2</li>
@@ -57,6 +58,7 @@ import HomeSwiper from './components/HomeSwiper'
 import HomeRecommend from './components/HomeRecommend'
 import HomePopular from './components/HomePopular'
 import Tabs from 'components/content/Tabs/Tabs'
+import GoodsList from 'components/content/GoodsList/GoodsList'
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
 
 export default {
@@ -66,7 +68,8 @@ export default {
     HomeSwiper,
     HomeRecommend,
     HomePopular,
-    Tabs
+    Tabs,
+    GoodsList
   },
   data () {
     return {
@@ -76,7 +79,8 @@ export default {
         pop: { page: 0, list: [] },
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
-      }
+      },
+      goodsType: 'pop'
     }
   },
   created () {
@@ -84,6 +88,11 @@ export default {
     this.getHomeTabsData('pop')
     this.getHomeTabsData('new')
     this.getHomeTabsData('sell')
+  },
+  computed: {
+    activeGoods () {
+      return this.homeGoods[this.goodsType].list
+    }
   },
   methods: {
     getHomeMultidata () {
@@ -104,6 +113,19 @@ export default {
           this.homeGoods[type].page += 1
         }
       })
+    },
+    handleTabItemClick (index) {
+      switch (index) {
+        case 0:
+          this.goodsType = 'pop'
+          break
+        case 1:
+          this.goodsType = 'new'
+          break
+        case 2:
+          this.goodsType = 'sell'
+          break
+      }
     }
   }
 }
