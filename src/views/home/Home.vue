@@ -72,20 +72,11 @@ export default {
     return {
       bannerList: [],
       recommendList: [],
-      controlList: [
-        {
-          id: 0,
-          text: '今年'
-        },
-        {
-          id: 1,
-          text: '明年'
-        },
-        {
-          id: 2,
-          text: '后年'
-        }
-      ]
+      homeGoods: {
+        pop: { page: 0, list: [] },
+        news: { page: 0, list: [] },
+        sell: { page: 0, list: [] }
+      }
     }
   },
   created () {
