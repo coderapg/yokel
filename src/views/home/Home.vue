@@ -3,73 +3,38 @@
     <nav-bar class="nav-bar" initColor="#333333">
       <div slot="center">首页</div>
     </nav-bar>
-    <home-swiper :bannerList="bannerList"/>
-    <home-recommend :recommendList="recommendList"/>
-    <home-popular />
-    <tabs :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick"/>
-    <goods-list :goodsList="activeGoods"/>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-    </ul>
+    <scroll class="wrap">
+      <home-swiper :bannerList="bannerList"/>
+      <home-recommend :recommendList="recommendList"/>
+      <home-popular />
+      <tabs :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick"/>
+      <goods-list :goodsList="activeGoods"/>
+    </scroll>
   </div>
 </template>
 
 <script>
-import NavBar from 'components/common/NavBar/NavBar'
 import HomeSwiper from './components/HomeSwiper'
 import HomeRecommend from './components/HomeRecommend'
 import HomePopular from './components/HomePopular'
+
+import NavBar from 'components/common/NavBar/NavBar'
 import Tabs from 'components/content/Tabs/Tabs'
 import GoodsList from 'components/content/GoodsList/GoodsList'
+import Scroll from 'components/common/Scroll/Scroll'
+
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
 
 export default {
   name: 'Home',
   components: {
-    NavBar,
     HomeSwiper,
     HomeRecommend,
     HomePopular,
+    NavBar,
     Tabs,
-    GoodsList
+    GoodsList,
+    Scroll
   },
   data () {
     return {
@@ -132,7 +97,23 @@ export default {
 </script>
 
 <style lang="less" scopde>
+  #home {
+    position: relative;
+    height: 100vh;
+  }
   .nav-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 99;
     background-color: #f8f8f8;
+  }
+  .wrap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 44px;
+    bottom: 49px;
   }
 </style>

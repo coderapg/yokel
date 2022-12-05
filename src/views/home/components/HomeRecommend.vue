@@ -39,7 +39,6 @@ export default {
         align-items: center;
         img {
           width: 80px;
-          // vertical-align: middle;
         }
         span {
           margin: 5px 0;
