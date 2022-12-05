@@ -7,7 +7,9 @@
       class="wrap"
       ref="scrollRef"
       :probe-type="3"
-      @handleBetterScrollScroll="handleBetterScrollScroll">
+      :pull-up-load="true"
+      @handleBetterScrollScroll="handleBetterScrollScroll"
+      @handleBetterScrollPullingUp="handleBetterScrollPullingUp">
       <home-swiper :bannerList="bannerList"/>
       <home-recommend :recommendList="recommendList"/>
       <home-popular />
@@ -176,6 +178,11 @@ export default {
         if (success) {
           this.homeGoods[type].list.push(...data.list)
           this.homeGoods[type].page += 1
+          // 当上拉加载更多是，调用 getHomeTabsData 时，每次触发 pullingUp 钩子后，你应该主动调用 finishPullUp() 告诉 BetterScroll 准备好下一次的 pullingUp 钩子
+          if (page > 1) {
+            this.$refs.scrollRef.overFinishPullUp()
+          }
+          // this.$refs.scrollRef.overFinishPullUp()
         }
       })
     },
@@ -201,6 +208,10 @@ export default {
     // 实时监听子组件中滚动值的变化
     handleBetterScrollScroll (position) {
       this.isShowBackTop = Math.abs(position.y) > 1000
+    },
+    // 上拉加载更多
+    handleBetterScrollPullingUp () {
+      this.getHomeTabsData(this.goodsType)
     }
   }
 }
