@@ -63,14 +63,16 @@ export default {
     this.getHomeTabsData('pop')
     this.getHomeTabsData('new')
     this.getHomeTabsData('sell')
-    this.$EventBus.$on('handleGoodsListItemImageLoad', () => {
-      this.$refs.scrollRef.upDataRefresh()
-    })
   },
   computed: {
     activeGoods () {
       return this.homeGoods[this.goodsType].list
     }
+  },
+  mounted () {
+    this.$EventBus.$on('handleGoodsListItemImageLoad', () => {
+      this.$refs.scrollRef.upDataRefresh()
+    })
   },
   methods: {
     getHomeMultidata () {

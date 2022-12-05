@@ -43,13 +43,13 @@ export default {
   },
   methods: {
     scrollBack (x, y, time = 500) {
-      this.scroll.scrollTo(x, y, time)
+      this.scroll && this.scroll.scrollTo(x, y, time)
     },
     overFinishPullUp () {
-      this.scroll.finishPullUp()
+      this.scroll && this.scroll.finishPullUp()
     },
     upDataRefresh () {
-      this.scroll.refresh()
+      this.scroll && this.scroll.refresh()
     }
   }
 }
