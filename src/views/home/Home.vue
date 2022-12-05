@@ -57,7 +57,7 @@ import HomeSwiper from './components/HomeSwiper'
 import HomeRecommend from './components/HomeRecommend'
 import HomePopular from './components/HomePopular'
 import Tabs from 'components/content/Tabs/Tabs'
-import { getHomeMultidata } from 'https/home'
+import { getHomeMultidata, getHomeTabsData } from 'https/home'
 
 export default {
   name: 'Home',
@@ -74,21 +74,35 @@ export default {
       recommendList: [],
       homeGoods: {
         pop: { page: 0, list: [] },
-        news: { page: 0, list: [] },
+        new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       }
     }
   },
   created () {
-    this.getHomeBanners()
+    this.getHomeMultidata()
+    this.getHomeTabsData('pop')
+    this.getHomeTabsData('new')
+    this.getHomeTabsData('sell')
   },
   methods: {
-    getHomeBanners () {
+    getHomeMultidata () {
       getHomeMultidata().then(res => {
         const { data: { banner, recommend }, success } = res
         if (success) {
           this.bannerList = banner.list
           this.recommendList = recommend.list
+        }
+      })
+    },
+    getHomeTabsData (type) {
+      const page = this.homeGoods[type].page + 1
+      console.log('page===', page)
+      getHomeTabsData(type, page).then(res => {
+        const { data, success } = res
+        if (success) {
+          this.homeGoods[type].list.push(...data.list)
+          this.homeGoods[type].page += 1
         }
       })
     }

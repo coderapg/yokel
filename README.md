@@ -32,7 +32,7 @@ goods: {
     page: 1,
     list: []
   },
-  'news': {
+  'new': {
     page: 1,
     list: []
   },
