@@ -47,6 +47,9 @@ export default {
     },
     overFinishPullUp () {
       this.scroll.finishPullUp()
+    },
+    upDataRefresh () {
+      this.scroll.refresh()
     }
   }
 }

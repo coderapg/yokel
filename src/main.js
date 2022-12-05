@@ -8,6 +8,8 @@ import 'normalize.css/normalize.css'
 
 Vue.config.productionTip = false
 
+Vue.prototype.$EventBus = new Vue()
+
 new Vue({
   store,
   router,

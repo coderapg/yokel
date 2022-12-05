@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item">
     <a :href="listItem.link">
-      <img :src="listItem.show.img" alt="">
+      <img :src="listItem.show.img" alt="" @load="handleGoodsListItemImageLoad">
       <div class="item-desc">
         <p class="item-title">{{ listItem.title }}</p>
         <div class="item-info">
@@ -36,6 +36,11 @@ export default {
   computed: {
     exceed () {
       return this.listItem.cfav > 100
+    }
+  },
+  methods: {
+    handleGoodsListItemImageLoad () {
+      this.$EventBus.$emit('handleGoodsListItemImageLoad')
     }
   }
 }
