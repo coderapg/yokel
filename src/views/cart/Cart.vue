@@ -9,5 +9,4 @@ export default {
 }
 </script>
 
-<style lang="less" scopde>
-</style>
+<style lang="less" scopde></style>

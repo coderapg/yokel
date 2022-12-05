@@ -3,13 +3,106 @@
     <nav-bar class="nav-bar" initColor="#333333">
       <div slot="center">首页</div>
     </nav-bar>
-    <scroll class="wrap">
+    <scroll class="wrap" ref="scrollRef">
       <home-swiper :bannerList="bannerList"/>
       <home-recommend :recommendList="recommendList"/>
       <home-popular />
       <tabs :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick"/>
       <goods-list :goodsList="activeGoods"/>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+      </ul>
     </scroll>
+    <back-top @click.native="handleBackTopClick"/>
   </div>
 </template>
 
@@ -22,6 +115,7 @@ import NavBar from 'components/common/NavBar/NavBar'
 import Tabs from 'components/content/Tabs/Tabs'
 import GoodsList from 'components/content/GoodsList/GoodsList'
 import Scroll from 'components/common/Scroll/Scroll'
+import BackTop from 'components/content/BackTop/BackTop'
 
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
 
@@ -34,7 +128,8 @@ export default {
     NavBar,
     Tabs,
     GoodsList,
-    Scroll
+    Scroll,
+    BackTop
   },
   data () {
     return {
@@ -79,6 +174,7 @@ export default {
         }
       })
     },
+    // 切换选项卡
     handleTabItemClick (index) {
       switch (index) {
         case 0:
@@ -91,6 +187,10 @@ export default {
           this.goodsType = 'sell'
           break
       }
+    },
+    // 首页返回顶部
+    handleBackTopClick () {
+      this.$refs.scrollRef.scroll.scrollTo(0, 44, 500)
     }
   }
 }
