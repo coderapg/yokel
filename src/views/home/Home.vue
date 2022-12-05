@@ -3,7 +3,11 @@
     <nav-bar class="nav-bar" initColor="#333333">
       <div slot="center">首页</div>
     </nav-bar>
-    <scroll class="wrap" ref="scrollRef">
+    <scroll
+      class="wrap"
+      ref="scrollRef"
+      :probe-type="3"
+      @handleBetterScrollScroll="handleBetterScrollScroll">
       <home-swiper :bannerList="bannerList"/>
       <home-recommend :recommendList="recommendList"/>
       <home-popular />
@@ -102,7 +106,7 @@
         <li>30</li>
       </ul>
     </scroll>
-    <back-top @click.native="handleBackTopClick"/>
+    <back-top @click.native="handleBackTopClick" v-show="isShowBackTop" />
   </div>
 </template>
 
@@ -140,7 +144,8 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      goodsType: 'pop'
+      goodsType: 'pop',
+      isShowBackTop: false
     }
   },
   created () {
@@ -190,7 +195,12 @@ export default {
     },
     // 首页返回顶部
     handleBackTopClick () {
-      this.$refs.scrollRef.scroll.scrollTo(0, 44, 500)
+      this.$refs.scrollRef.scrollBack(0, 44, 500)
+      // this.$refs.scrollRef.scroll.scrollTo(0, 44, 500)
+    },
+    // 实时监听子组件中滚动值的变化
+    handleBetterScrollScroll (position) {
+      this.isShowBackTop = Math.abs(position.y) > 1000
     }
   }
 }
