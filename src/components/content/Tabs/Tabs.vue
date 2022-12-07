@@ -40,6 +40,7 @@ export default {
 <style lang="less" scoped>
   .tabs {
     display: flex;
+    background-color: #fff;
     .tab-item {
       flex: 1;
       text-align: center;

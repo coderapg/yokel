@@ -29,8 +29,10 @@ export default {
     height: 44px;
     line-height: 44px;
     text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.02);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.06);
     font-size: 16px;
+    box-sizing: border-box;
     .left, .right {
       width: 60px;
     }

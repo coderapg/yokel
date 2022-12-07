@@ -33,13 +33,17 @@ export default {
       probeType: this.probeType,
       pullUpLoad: this.pullUpLoad
     })
-    this.scroll.on('scroll', position => {
-      this.$emit('handleBetterScrollScroll', position)
-    })
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on('scroll', position => {
+        this.$emit('handleBetterScrollScroll', position)
+      })
+    }
     // 上拉加载更多
-    this.scroll.on('pullingUp', () => {
-      this.$emit('handleBetterScrollPullingUp')
-    })
+    if (this.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
+        this.$emit('handleBetterScrollPullingUp')
+      })
+    }
   },
   methods: {
     scrollBack (x, y, time = 500) {
@@ -50,7 +54,6 @@ export default {
     },
     upDataRefresh () {
       this.scroll && this.scroll.refresh()
-      console.log('执行几次')
     }
   }
 }
