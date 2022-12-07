@@ -59,7 +59,8 @@ export default {
       goodsType: 'pop',
       isShowBackTop: false,
       tabsOffsetTop: 0,
-      showTabs: false
+      showTabs: false,
+      saveY: 0
     }
   },
   created () {
@@ -79,6 +80,13 @@ export default {
       const refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
       refreImg()
     })
+  },
+  activated () {
+    this.$refs.scrollRef.scrollBack(0, this.saveY, 0)
+    this.$refs.scrollRef.upDataRefresh()
+  },
+  deactivated () {
+    this.saveY = this.$refs.scrollRef.scroll.y
   },
   methods: {
     getHomeMultidata () {
@@ -101,7 +109,6 @@ export default {
           if (page >= 1) {
             this.$refs.scrollRef.overFinishPullUp()
           }
-          // this.$refs.scrollRef.overFinishPullUp()
         }
       })
     },
@@ -125,7 +132,6 @@ export default {
     // 首页返回顶部
     handleBackTopClick () {
       this.$refs.scrollRef.scrollBack(0, 44, 500)
-      // this.$refs.scrollRef.scroll.scrollTo(0, 44, 500)
     },
     // 实时监听子组件中滚动值的变化
     handleBetterScrollScroll (position) {
