@@ -50,6 +50,7 @@ export default {
     },
     upDataRefresh () {
       this.scroll && this.scroll.refresh()
+      console.log('执行几次')
     }
   }
 }

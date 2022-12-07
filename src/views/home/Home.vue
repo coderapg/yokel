@@ -32,6 +32,7 @@ import Scroll from 'components/common/Scroll/Scroll'
 import BackTop from 'components/content/BackTop/BackTop'
 
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
+import { debounce } from '@/common/utils'
 
 export default {
   name: 'Home',
@@ -71,7 +72,8 @@ export default {
   },
   mounted () {
     this.$EventBus.$on('handleGoodsListItemImageLoad', () => {
-      this.$refs.scrollRef.upDataRefresh()
+      const refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
+      refreImg()
     })
   },
   methods: {
