@@ -54,7 +54,16 @@
 <script>
 
 export default {
-  name: 'DetailWaresRelated'
+  name: 'DetailWaresRelated',
+  props: {
+    detailWaresInfo: {
+      type: Object,
+      default () {
+        return {}
+      },
+      require: true
+    }
+  }
 }
 </script>
 
