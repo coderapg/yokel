@@ -1,9 +1,11 @@
 <template>
   <div id="detail">
+    <detail-nav-bar />
   </div>
 </template>
 
 <script>
+import DetailNavBar from './components/DetailNavBar'
 
 export default {
   name: 'Detail',
@@ -11,6 +13,9 @@ export default {
     return {
       iid: null
     }
+  },
+  components: {
+    DetailNavBar
   },
   created () {
     const { iid } = this.$route.query
