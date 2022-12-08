@@ -1,5 +1,5 @@
 <template>
-  <div class="wares-info bor-rad12 pad12">
+  <div class="wares-info bor-rad12 pad12 mb16" v-if="Object.keys(detailWaresInfo).length !== 0">
     <div class="wares-info-head">
       <div class="wares-info-head-tips">
         <div class="wares-info-first-content bor-rad3">
@@ -21,12 +21,14 @@
         <span class="sales-amount">月销1万+</span>
       </div>
       <div class="info-sales-title">
-        <p class="info-sales-desc">Nike耐克官方AIR FORCE 1 '07 男子空军一号运动小白鞋情侣CW2288</p>
+        <p class="info-sales-desc">{{ detailWaresInfo.title }}</p>
       </div>
     </div>
     <div class="wares-info-foot">
       <div class="wares-info-ranking">
-        <img src="~assets/images/common/top_pic.png" alt="">
+        <span class="wares-ranking-real">{{ detailWaresInfo.newPrice }}</span>
+        <span class="wares-ranking-old">{{ detailWaresInfo.oldPrice }}</span>
+        <span class="wares-ranking-you">优惠价</span>
       </div>
       <div class="wares-info-foot-tips">
         <div class="wares-info-tips-item">
@@ -151,8 +153,24 @@ export default {
     }
     .wares-info-foot {
       .wares-info-ranking {
-        img {
-          width: 100%;
+        margin: 16px 0px;
+        .wares-ranking-real {
+          font-size: 18px;
+          color: var(--tips-color);
+          font-weight: 500;
+        }
+        .wares-ranking-old {
+          font-size: 12px;
+          color: #aaa;
+          text-decoration: line-through;
+          margin: 0px 2px;
+        }
+        .wares-ranking-you {
+          padding: 2px 4px;
+          background-color: var(--tips-color);
+          color: #fff;
+          font-size: 12px;
+          border-radius: 8px;
         }
       }
       .wares-info-foot-tips {

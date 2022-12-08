@@ -4,6 +4,30 @@
     <detail-swiper :detailBannerList="detailBannerList" />
     <div class="detail-wares-related">
       <detail-wares-related :detailWaresInfo="detailWaresInfo" />
+      <detail-seller :sellerInfo="sellerInfo" />
+      <ul>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -11,11 +35,10 @@
 <script>
 import DetailNavBar from './components/DetailNavBar'
 import DetailSwiper from './components/DetailSwiper'
-
 import DetailWaresRelated from './components/DetailWaresRelated'
+import DetailSeller from './components/DetailSeller'
 
-import { getDetailMultidata } from 'https/detail'
-import { WaresInfo } from 'common/utils'
+import { getDetailMultidata, WaresInfo, SellerInfo } from 'https/detail'
 
 export default {
   name: 'Detail',
@@ -23,13 +46,15 @@ export default {
     return {
       iid: null,
       detailBannerList: [],
-      detailWaresInfo: {}
+      detailWaresInfo: {},
+      sellerInfo: {}
     }
   },
   components: {
     DetailNavBar,
     DetailSwiper,
-    DetailWaresRelated
+    DetailWaresRelated,
+    DetailSeller
   },
   created () {
     const { iid } = this.$route.query
@@ -51,6 +76,7 @@ export default {
         } = res.result
         this.detailBannerList = itemInfo.topImages
         this.detailWaresInfo = new WaresInfo(itemInfo, columns, shopInfo.services)
+        this.sellerInfo = new SellerInfo(shopInfo, this.iid)
       })
     }
   }

@@ -1,7 +1,10 @@
 :root {
+  /* 字体颜色 */
   --tank-color: #d81e06;
   --span-color: #666;
   --tips-color: #fd397b;
+  /* 背景颜色 */
+  --bg-f8: #f8f8f8;
 }
 a {
   text-decoration: none;
@@ -20,4 +23,7 @@ p {
 }
 .pad12 {
   padding: 12px;
+}
+.mb16 {
+  margin-bottom: 16px;
 }
