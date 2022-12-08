@@ -1,13 +1,18 @@
 <template>
   <div id="detail">
     <detail-nav-bar />
-    <detail-swiper class="detail-swiper" :detailBannerList="detailBannerList" />
+    <detail-swiper :detailBannerList="detailBannerList" />
+    <div class="detail-wares-related">
+      <detail-wares-related />
+    </div>
   </div>
 </template>
 
 <script>
 import DetailNavBar from './components/DetailNavBar'
-import DetailSwiper from '@/views/detail/components/DetailSwiper'
+import DetailSwiper from './components/DetailSwiper'
+
+import DetailWaresRelated from './components/DetailWaresRelated'
 
 import { getDetailMultidata } from 'https/detail'
 
@@ -21,7 +26,8 @@ export default {
   },
   components: {
     DetailNavBar,
-    DetailSwiper
+    DetailSwiper,
+    DetailWaresRelated
   },
   created () {
     const { iid } = this.$route.query
@@ -49,8 +55,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .detail-swiper {
-    height: 260px;
-    overflow: hidden;
+  // #detail {}
+  .detail-wares-related {
+    background-color: #f0f0f0;
+    padding: 10px 9px;
+    box-sizing: border-box;
+    .wares-info {
+      background-color: #fff;
+    }
   }
 </style>

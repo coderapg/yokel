@@ -1,5 +1,5 @@
 <template>
-  <swiper>
+  <swiper class="detail-swiper">
     <swiper-item v-for="(item, index) in detailBannerList" :key="index">
       <img :src="item" alt="">
     </swiper-item>
@@ -27,4 +27,9 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+  .detail-swiper {
+    height: 240px;
+    overflow: hidden;
+  }
+</style>
