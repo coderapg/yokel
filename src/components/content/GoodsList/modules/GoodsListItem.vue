@@ -1,6 +1,6 @@
 <template>
   <div class="goods-list-item">
-    <a :href="listItem.link">
+    <a href="javascript:;" @click="handleGoodsListItemClick">
       <img :src="listItem.show.img" alt="" @load="handleGoodsListItemImageLoad">
       <div class="item-desc">
         <p class="item-title">{{ listItem.title }}</p>
@@ -41,6 +41,15 @@ export default {
   methods: {
     handleGoodsListItemImageLoad () {
       this.$EventBus.$emit('handleGoodsListItemImageLoad')
+    },
+    handleGoodsListItemClick () {
+      const { iid } = this.listItem
+      this.$router.push({
+        path: '/detail',
+        query: {
+          iid
+        }
+      })
     }
   }
 }

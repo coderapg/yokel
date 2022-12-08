@@ -3,7 +3,12 @@
     <nav-bar class="nav-bar" initColor="#333333">
       <div slot="center">首页</div>
     </nav-bar>
-    <tabs v-show="showTabs" ref="tabControl" :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick" class="tab-control"/>
+    <tabs
+      class="tab-control"
+      v-show="showTabs"
+      ref="tabControl"
+      :controlList="['流行', '新款', '精选']"
+      @handleTabItemClick="handleTabItemClick" />
     <scroll
       class="wrap"
       ref="scrollRef"
@@ -11,11 +16,11 @@
       :pull-up-load="true"
       @handleBetterScrollScroll="handleBetterScrollScroll"
       @handleBetterScrollPullingUp="handleBetterScrollPullingUp">
-      <home-swiper :bannerList="bannerList" @handleBannerImageLoad="handleBannerImageLoad"/>
-      <home-recommend :recommendList="recommendList"/>
+      <home-swiper :bannerList="bannerList" @handleBannerImageLoad="handleBannerImageLoad" />
+      <home-recommend :recommendList="recommendList" />
       <home-popular />
-      <tabs ref="tabs" :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick"/>
-      <goods-list :goodsList="activeGoods"/>
+      <tabs ref="tabs" :controlList="['流行', '新款', '精选']" @handleTabItemClick="handleTabItemClick" />
+      <goods-list :goodsList="activeGoods" />
     </scroll>
     <back-top @click.native="handleBackTopClick" v-show="isShowBackTop" />
   </div>
