@@ -52,3 +52,13 @@ export class GoodsParam {
     this.sizes = rule.tables
   }
 }
+
+// 详情页获取推荐数据
+export function recommendingCommodities (iid) {
+  return request({
+    url: '/recommend',
+    params: {
+      iid
+    }
+  })
+}

@@ -38,7 +38,7 @@ import Scroll from 'components/common/Scroll/Scroll'
 import BackTop from 'components/content/BackTop/BackTop'
 
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
-import { debounce } from '@/common/utils'
+import { debounce } from 'common/utils'
 
 export default {
   name: 'Home',
@@ -65,7 +65,8 @@ export default {
       isShowBackTop: false,
       tabsOffsetTop: 0,
       showTabs: false,
-      saveY: 0
+      saveY: 0,
+      imgLoad: null
     }
   },
   created () {
@@ -81,17 +82,21 @@ export default {
   },
   mounted () {
     // 1. 监听图片加载完毕
-    this.$EventBus.$on('handleGoodsListItemImageLoad', () => {
+    this.imgLoad = () => {
       const refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
       refreImg()
-    })
+    }
+    this.$EventBus.$on('handleGoodsListItemImageLoad', this.imgLoad)
   },
   activated () {
     this.$refs.scrollRef.scrollBack(0, this.saveY, 0)
     this.$refs.scrollRef.upDataRefresh()
   },
   deactivated () {
+    // 1. 离开是记录当前y的值，后续再次进来的时候给scroll赋值
     this.saveY = this.$refs.scrollRef.scroll.y
+    // 2. 离开时取消事件总线中的事件(因为在详情页中也需要接收从GoodsListItem中发射过来的事件，因为事件名称都是一样的，所以这里需要取消，否则发生不必要的bug)
+    this.$EventBus.$off('handleGoodsListItemImageLoad', this.imgLoad)
   },
   methods: {
     getHomeMultidata () {

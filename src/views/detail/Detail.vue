@@ -10,6 +10,7 @@
       <detail-goods-info :goodsInfo="goodsInfo" @goodsInfoImgLoad="goodsInfoImgLoad" />
       <detail-param-info :paramInfo="paramInfo" />
       <detail-comments-rate :commentInfo="commentInfo" />
+      <goods-list :goodsList="goodsList" />
       <ul>
         <li>1</li>
         <li>2</li>
@@ -48,6 +49,7 @@
 
 <script>
 import Scroll from 'components/common/Scroll/Scroll'
+import GoodsList from 'components/content/GoodsList/GoodsList'
 
 import DetailNavBar from './components/DetailNavBar'
 import DetailSwiper from './components/DetailSwiper'
@@ -57,7 +59,8 @@ import DetailGoodsInfo from './components/DetailGoodsInfo'
 import DetailParamInfo from './components/DetailParamInfo'
 import DetailCommentsRate from './components/DetailCommentsRate'
 
-import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam } from 'https/detail'
+import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
+import { debounce } from 'common/utils'
 
 export default {
   name: 'Detail',
@@ -69,7 +72,9 @@ export default {
       sellerInfo: {},
       goodsInfo: {},
       paramInfo: {},
-      commentInfo: {}
+      commentInfo: {},
+      goodsList: [],
+      imgLoad: null
     }
   },
   components: {
@@ -80,7 +85,8 @@ export default {
     DetailSeller,
     DetailGoodsInfo,
     DetailParamInfo,
-    DetailCommentsRate
+    DetailCommentsRate,
+    GoodsList
   },
   created () {
     // 保存传入的iid
@@ -88,6 +94,14 @@ export default {
     this.iid = iid
     // 根据iid请求对应的详情数据
     this.getDetailMultidata(iid)
+    this.recommendingCommodities(iid)
+  },
+  mounted () {
+    this.imgLoad = () => {
+      const refreImg = debounce(this.$refs.detailScroll.upDataRefresh, 200)
+      refreImg()
+    }
+    this.$EventBus.$on('handleGoodsListItemImageLoad', this.imgLoad)
   },
   methods: {
     getDetailMultidata (idx) {
@@ -121,6 +135,15 @@ export default {
     // 监听图片加载完成
     goodsInfoImgLoad () {
       this.$refs.detailScroll.upDataRefresh()
+    },
+    // 获取详情页推荐数据
+    recommendingCommodities (iid) {
+      recommendingCommodities(iid).then(res => {
+        const { data: { list }, success } = res
+        if (success) {
+          this.goodsList = list
+        }
+      })
     }
   }
 }

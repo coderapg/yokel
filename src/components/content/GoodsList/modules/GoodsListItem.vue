@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item">
     <a href="javascript:;" @click="handleGoodsListItemClick">
-      <img :src="listItem.show.img" alt="" @load="handleGoodsListItemImageLoad">
+      <img :src="showImg" alt="" @load="handleGoodsListItemImageLoad">
       <div class="item-desc">
         <p class="item-title">{{ listItem.title }}</p>
         <div class="item-info">
@@ -34,6 +34,9 @@ export default {
     }
   },
   computed: {
+    showImg () {
+      return this.listItem.show ? this.listItem.show.img : this.listItem.image
+    },
     exceed () {
       return this.listItem.cfav > 100
     }
