@@ -21,7 +21,7 @@ export default {
       default () {
         return []
       },
-      require: true
+      required: true
     }
   }
 }

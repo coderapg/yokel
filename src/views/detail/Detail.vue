@@ -9,6 +9,39 @@
       </div>
       <detail-goods-info :goodsInfo="goodsInfo" @goodsInfoImgLoad="goodsInfoImgLoad" />
       <detail-param-info :paramInfo="paramInfo" />
+      <detail-comments-rate :commentInfo="commentInfo" />
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+        <li>23</li>
+        <li>24</li>
+        <li>25</li>
+        <li>26</li>
+        <li>27</li>
+        <li>28</li>
+        <li>29</li>
+        <li>30</li>
+      </ul>
     </scroll>
   </div>
 </template>
@@ -22,6 +55,7 @@ import DetailWaresRelated from './components/DetailWaresRelated'
 import DetailSeller from './components/DetailSeller'
 import DetailGoodsInfo from './components/DetailGoodsInfo'
 import DetailParamInfo from './components/DetailParamInfo'
+import DetailCommentsRate from './components/DetailCommentsRate'
 
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam } from 'https/detail'
 
@@ -34,7 +68,8 @@ export default {
       detailWaresInfo: {},
       sellerInfo: {},
       goodsInfo: {},
-      paramInfo: {}
+      paramInfo: {},
+      commentInfo: {}
     }
   },
   components: {
@@ -44,7 +79,8 @@ export default {
     DetailWaresRelated,
     DetailSeller,
     DetailGoodsInfo,
-    DetailParamInfo
+    DetailParamInfo,
+    DetailCommentsRate
   },
   created () {
     // 保存传入的iid
@@ -61,7 +97,7 @@ export default {
           detailInfo,
           itemInfo,
           itemParams,
-          // rate,
+          rate,
           shopInfo
           // skuInfo,
           // topBar
@@ -76,6 +112,10 @@ export default {
         this.goodsInfo = detailInfo
         // 5. 保存商品的参数信息
         this.paramInfo = new GoodsParam(itemParams.info, itemParams.rule)
+        // 6. 保存评论信息
+        if (rate.cRate !== 0) {
+          this.commentInfo = rate.list[0]
+        }
       })
     },
     // 监听图片加载完成

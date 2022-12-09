@@ -13,17 +13,17 @@ export default {
   props: {
     path: {
       type: String,
-      require: true
+      required: true
     },
     initColor: {
       type: String,
       default: '#333333',
-      require: true
+      required: true
     },
     activeColor: {
       type: String,
       default: '#d81e06',
-      require: true
+      required: true
     }
   },
   computed: {
