@@ -38,10 +38,11 @@ import Scroll from 'components/common/Scroll/Scroll'
 import BackTop from 'components/content/BackTop/BackTop'
 
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
-import { debounce } from 'common/utils'
+import { imgRefreshLoadMixin } from 'common/mixin'
 
 export default {
   name: 'Home',
+  mixins: [imgRefreshLoadMixin],
   components: {
     HomeSwiper,
     HomeRecommend,
@@ -65,8 +66,7 @@ export default {
       isShowBackTop: false,
       tabsOffsetTop: 0,
       showTabs: false,
-      saveY: 0,
-      imgLoad: null
+      saveY: 0
     }
   },
   created () {
@@ -79,14 +79,6 @@ export default {
     activeGoods () {
       return this.homeGoods[this.goodsType].list
     }
-  },
-  mounted () {
-    // 1. 监听图片加载完毕
-    this.imgLoad = () => {
-      const refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
-      refreImg()
-    }
-    this.$EventBus.$on('handleGoodsListItemImageLoad', this.imgLoad)
   },
   activated () {
     this.$refs.scrollRef.scrollBack(0, this.saveY, 0)

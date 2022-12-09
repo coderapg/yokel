@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav-bar" />
-    <scroll class="detail-scroll" ref="detailScroll">
+    <scroll class="detail-scroll" ref="scrollRef">
       <detail-swiper :detailBannerList="detailBannerList" />
       <div class="detail-wares-related">
         <detail-wares-related :detailWaresInfo="detailWaresInfo" />
@@ -60,10 +60,11 @@ import DetailParamInfo from './components/DetailParamInfo'
 import DetailCommentsRate from './components/DetailCommentsRate'
 
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
-import { debounce } from 'common/utils'
+import { imgRefreshLoadMixin } from 'common/mixin'
 
 export default {
   name: 'Detail',
+  mixins: [imgRefreshLoadMixin],
   data () {
     return {
       iid: null,
@@ -73,8 +74,7 @@ export default {
       goodsInfo: {},
       paramInfo: {},
       commentInfo: {},
-      goodsList: [],
-      imgLoad: null
+      goodsList: []
     }
   },
   components: {
@@ -95,13 +95,6 @@ export default {
     // 根据iid请求对应的详情数据
     this.getDetailMultidata(iid)
     this.recommendingCommodities(iid)
-  },
-  mounted () {
-    this.imgLoad = () => {
-      const refreImg = debounce(this.$refs.detailScroll.upDataRefresh, 200)
-      refreImg()
-    }
-    this.$EventBus.$on('handleGoodsListItemImageLoad', this.imgLoad)
   },
   methods: {
     getDetailMultidata (idx) {
@@ -134,7 +127,7 @@ export default {
     },
     // 监听图片加载完成
     goodsInfoImgLoad () {
-      this.$refs.detailScroll.upDataRefresh()
+      this.$refs.scrollRef.upDataRefresh()
     },
     // 获取详情页推荐数据
     recommendingCommodities (iid) {
