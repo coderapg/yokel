@@ -8,6 +8,7 @@
         <detail-seller :sellerInfo="sellerInfo" />
       </div>
       <detail-goods-info :goodsInfo="goodsInfo" @goodsInfoImgLoad="goodsInfoImgLoad" />
+      <detail-param-info :paramInfo="paramInfo" />
     </scroll>
   </div>
 </template>
@@ -20,8 +21,9 @@ import DetailSwiper from './components/DetailSwiper'
 import DetailWaresRelated from './components/DetailWaresRelated'
 import DetailSeller from './components/DetailSeller'
 import DetailGoodsInfo from './components/DetailGoodsInfo'
+import DetailParamInfo from './components/DetailParamInfo'
 
-import { getDetailMultidata, WaresInfo, SellerInfo } from 'https/detail'
+import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam } from 'https/detail'
 
 export default {
   name: 'Detail',
@@ -31,7 +33,8 @@ export default {
       detailBannerList: [],
       detailWaresInfo: {},
       sellerInfo: {},
-      goodsInfo: {}
+      goodsInfo: {},
+      paramInfo: {}
     }
   },
   components: {
@@ -40,7 +43,8 @@ export default {
     DetailSwiper,
     DetailWaresRelated,
     DetailSeller,
-    DetailGoodsInfo
+    DetailGoodsInfo,
+    DetailParamInfo
   },
   created () {
     // 保存传入的iid
@@ -56,7 +60,7 @@ export default {
           columns,
           detailInfo,
           itemInfo,
-          // itemParams,
+          itemParams,
           // rate,
           shopInfo
           // skuInfo,
@@ -70,6 +74,8 @@ export default {
         this.sellerInfo = new SellerInfo(shopInfo, this.iid)
         // 4. 保存商品的详情数据
         this.goodsInfo = detailInfo
+        // 5. 保存商品的参数信息
+        this.paramInfo = new GoodsParam(itemParams.info, itemParams.rule)
       })
     },
     // 监听图片加载完成
