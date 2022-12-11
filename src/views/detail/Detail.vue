@@ -11,39 +11,8 @@
       <detail-param-info :paramInfo="paramInfo" ref="paramInfo" />
       <detail-comments-rate :commentInfo="commentInfo" ref="commentInfo" />
       <goods-list :goodsList="goodsList" ref="goodsList" />
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li>6</li>
-        <li>7</li>
-        <li>8</li>
-        <li>9</li>
-        <li>10</li>
-        <li>11</li>
-        <li>12</li>
-        <li>13</li>
-        <li>14</li>
-        <li>15</li>
-        <li>16</li>
-        <li>17</li>
-        <li>18</li>
-        <li>19</li>
-        <li>20</li>
-        <li>21</li>
-        <li>22</li>
-        <li>23</li>
-        <li>24</li>
-        <li>25</li>
-        <li>26</li>
-        <li>27</li>
-        <li>28</li>
-        <li>29</li>
-        <li>30</li>
-      </ul>
     </scroll>
+    <detail-tool-bar />
   </div>
 </template>
 
@@ -58,6 +27,7 @@ import DetailSeller from './components/DetailSeller'
 import DetailGoodsInfo from './components/DetailGoodsInfo'
 import DetailParamInfo from './components/DetailParamInfo'
 import DetailCommentsRate from './components/DetailCommentsRate'
+import DetailToolBar from './components/DetailToolBar'
 
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
 import { imgRefreshLoadMixin } from 'common/mixin'
@@ -90,7 +60,8 @@ export default {
     DetailGoodsInfo,
     DetailParamInfo,
     DetailCommentsRate,
-    GoodsList
+    GoodsList,
+    DetailToolBar
   },
   created () {
     // 保存传入的iid
@@ -196,7 +167,7 @@ export default {
     background-color: #fff;
   }
   .detail-scroll {
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 49px);
   }
   .detail-wares-related {
     background-color: #f0f0f0;
