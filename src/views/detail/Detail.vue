@@ -1,6 +1,6 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="detail-nav-bar" />
+    <detail-nav-bar class="detail-nav-bar" @handleNavBarItemClick="handleNavBarItemClick" />
     <scroll class="detail-scroll" ref="scrollRef">
       <detail-swiper :detailBannerList="detailBannerList" />
       <div class="detail-wares-related">
@@ -8,9 +8,9 @@
         <detail-seller :sellerInfo="sellerInfo" />
       </div>
       <detail-goods-info :goodsInfo="goodsInfo" @goodsInfoImgLoad="goodsInfoImgLoad" />
-      <detail-param-info :paramInfo="paramInfo" />
-      <detail-comments-rate :commentInfo="commentInfo" />
-      <goods-list :goodsList="goodsList" />
+      <detail-param-info :paramInfo="paramInfo" ref="paramInfo" />
+      <detail-comments-rate :commentInfo="commentInfo" ref="commentInfo" />
+      <goods-list :goodsList="goodsList" ref="goodsList" />
       <ul>
         <li>1</li>
         <li>2</li>
@@ -61,6 +61,7 @@ import DetailCommentsRate from './components/DetailCommentsRate'
 
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
 import { imgRefreshLoadMixin } from 'common/mixin'
+import { debounce } from 'common/utils'
 
 export default {
   name: 'Detail',
@@ -74,7 +75,9 @@ export default {
       goodsInfo: {},
       paramInfo: {},
       commentInfo: {},
-      goodsList: []
+      goodsList: [],
+      themeTopYs: [],
+      getThemeTopYs: null
     }
   },
   components: {
@@ -95,6 +98,14 @@ export default {
     // 根据iid请求对应的详情数据
     this.getDetailMultidata(iid)
     this.recommendingCommodities(iid)
+    // 7. 获取到DOM元素对应的offsetTop的值
+    this.getThemeTopYs = debounce(() => {
+      this.themeTopYs = []
+      this.themeTopYs.push(0)
+      this.themeTopYs.push(this.$refs.paramInfo.$el.offsetTop)
+      this.themeTopYs.push(this.$refs.commentInfo.$el.offsetTop)
+      this.themeTopYs.push(this.$refs.goodsList.$el.offsetTop)
+    }, 500)
   },
   methods: {
     getDetailMultidata (idx) {
@@ -125,9 +136,10 @@ export default {
         }
       })
     },
-    // 监听图片加载完成
+    // 监听穿着效果图片加载完成
     goodsInfoImgLoad () {
       this.$refs.scrollRef.upDataRefresh()
+      this.getThemeTopYs()
     },
     // 获取详情页推荐数据
     recommendingCommodities (iid) {
@@ -137,6 +149,10 @@ export default {
           this.goodsList = list
         }
       })
+    },
+    // 获取点击navbar对应的值
+    handleNavBarItemClick (index) {
+      this.$refs.scrollRef.scrollBack(0, -this.themeTopYs[index], 500)
     }
   }
 }

@@ -26,6 +26,7 @@ export default {
   methods: {
     handleNavBarItemClick (index) {
       this.curIndex = index
+      this.$emit('handleNavBarItemClick', index)
     },
     handleNavBarLeftClick () {
       this.$router.back()

@@ -4,14 +4,15 @@ import { debounce } from './utils'
 export const imgRefreshLoadMixin = {
   data () {
     return {
-      imgLoad: null
+      imgLoad: null,
+      refreImg: null
     }
   },
   mounted () {
     // 1. 监听图片加载完毕
+    this.refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
     this.imgLoad = () => {
-      const refreImg = debounce(this.$refs.scrollRef.upDataRefresh, 200)
-      refreImg()
+      this.refreImg()
     }
     this.$EventBus.$on('handleGoodsListItemImageLoad', this.imgLoad)
   }
