@@ -32,12 +32,12 @@ import DetailCommentsRate from './components/DetailCommentsRate'
 import DetailToolBar from './components/DetailToolBar'
 
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
-import { imgRefreshLoadMixin } from 'common/mixin'
+import { imgRefreshLoadMixin, backTopMixin } from 'common/mixin'
 import { debounce } from 'common/utils'
 
 export default {
   name: 'Detail',
-  mixins: [imgRefreshLoadMixin],
+  mixins: [imgRefreshLoadMixin, backTopMixin],
   data () {
     return {
       iid: null,
@@ -50,8 +50,7 @@ export default {
       goodsList: [],
       themeTopYs: [],
       getThemeTopYs: null,
-      currIndex: 0,
-      isShowBackTop: false
+      currIndex: 0
     }
   },
   components: {
@@ -133,7 +132,7 @@ export default {
     },
     // 滚动better-scroll时改变对应的navBar中的index
     handleBetterScrollScroll (position) {
-      this.isShowBackTop = Math.abs(position.y) > 1000
+      this.mixinPosition(position, 1500)
       const Length = this.themeTopYs.length
       const positionY = -position.y
       // 普通的做法
@@ -150,10 +149,6 @@ export default {
           this.$refs.navBar.curIndex = this.currIndex
         }
       }
-    },
-    // 首页返回顶部
-    handleBackTopClick () {
-      this.$refs.scrollRef.scrollBack(0, 44, 500)
     }
   }
 }

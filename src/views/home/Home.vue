@@ -38,11 +38,11 @@ import Scroll from 'components/common/Scroll/Scroll'
 import BackTop from 'components/content/BackTop/BackTop'
 
 import { getHomeMultidata, getHomeTabsData } from 'https/home'
-import { imgRefreshLoadMixin } from 'common/mixin'
+import { imgRefreshLoadMixin, backTopMixin } from 'common/mixin'
 
 export default {
   name: 'Home',
-  mixins: [imgRefreshLoadMixin],
+  mixins: [imgRefreshLoadMixin, backTopMixin],
   components: {
     HomeSwiper,
     HomeRecommend,
@@ -63,7 +63,6 @@ export default {
         sell: { page: 0, list: [] }
       },
       goodsType: 'pop',
-      isShowBackTop: false,
       tabsOffsetTop: 0,
       showTabs: false,
       saveY: 0
@@ -131,13 +130,9 @@ export default {
       this.$refs.tabs.currIndex = index
       this.$refs.tabControl.currIndex = index
     },
-    // 首页返回顶部
-    handleBackTopClick () {
-      this.$refs.scrollRef.scrollBack(0, 44, 500)
-    },
     // 实时监听子组件中滚动值的变化
     handleBetterScrollScroll (position) {
-      this.isShowBackTop = Math.abs(position.y) > 1000
+      this.mixinPosition(position, 1500)
       this.showTabs = Math.abs(position.y) > this.tabsOffsetTop
     },
     // 上拉加载更多
