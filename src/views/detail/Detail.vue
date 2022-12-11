@@ -106,6 +106,7 @@ export default {
       this.themeTopYs.push(this.$refs.paramInfo.$el.offsetTop)
       this.themeTopYs.push(this.$refs.commentInfo.$el.offsetTop)
       this.themeTopYs.push(this.$refs.goodsList.$el.offsetTop)
+      this.themeTopYs.push(Number.MAX_VALUE) // hacker做法，为了方便后期滚动时判断的条件太过复杂
     }, 500)
   },
   methods: {
@@ -159,8 +160,16 @@ export default {
     handleBetterScrollScroll (position) {
       const Length = this.themeTopYs.length
       const positionY = -position.y
-      for (let i = 0; i < Length; i++) {
-        if (this.currIndex !== i && ((i < Length && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) || (i === Length - 1 && positionY >= this.themeTopYs[i]))) {
+      // 普通的做法
+      // for (let i = 0; i < Length; i++) {
+      //   if (this.currIndex !== i && ((i < Length && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) || (i === Length - 1 && positionY >= this.themeTopYs[i]))) {
+      //     this.currIndex = i
+      //     this.$refs.navBar.curIndex = this.currIndex
+      //   }
+      // }
+      // hacker做法
+      for (let i = 0; i < Length - 1; i++) {
+        if (this.currIndex !== i && (positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1])) {
           this.currIndex = i
           this.$refs.navBar.curIndex = this.currIndex
         }
