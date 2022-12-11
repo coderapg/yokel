@@ -1,6 +1,7 @@
 // 定义混入
 import { debounce } from './utils'
 
+// 封装防抖函数混入
 export const imgRefreshLoadMixin = {
   data () {
     return {

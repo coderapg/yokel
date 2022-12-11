@@ -12,6 +12,7 @@
       <detail-comments-rate :commentInfo="commentInfo" ref="commentInfo" />
       <goods-list :goodsList="goodsList" ref="goodsList" />
     </scroll>
+    <back-top @click.native="handleBackTopClick" v-show="isShowBackTop" />
     <detail-tool-bar />
   </div>
 </template>
@@ -19,6 +20,7 @@
 <script>
 import Scroll from 'components/common/Scroll/Scroll'
 import GoodsList from 'components/content/GoodsList/GoodsList'
+import BackTop from 'components/content/BackTop/BackTop'
 
 import DetailNavBar from './components/DetailNavBar'
 import DetailSwiper from './components/DetailSwiper'
@@ -48,7 +50,8 @@ export default {
       goodsList: [],
       themeTopYs: [],
       getThemeTopYs: null,
-      currIndex: 0
+      currIndex: 0,
+      isShowBackTop: false
     }
   },
   components: {
@@ -61,6 +64,7 @@ export default {
     DetailParamInfo,
     DetailCommentsRate,
     GoodsList,
+    BackTop,
     DetailToolBar
   },
   created () {
@@ -129,6 +133,7 @@ export default {
     },
     // 滚动better-scroll时改变对应的navBar中的index
     handleBetterScrollScroll (position) {
+      this.isShowBackTop = Math.abs(position.y) > 1000
       const Length = this.themeTopYs.length
       const positionY = -position.y
       // 普通的做法
@@ -145,6 +150,10 @@ export default {
           this.$refs.navBar.curIndex = this.currIndex
         }
       }
+    },
+    // 首页返回顶部
+    handleBackTopClick () {
+      this.$refs.scrollRef.scrollBack(0, 44, 500)
     }
   }
 }
