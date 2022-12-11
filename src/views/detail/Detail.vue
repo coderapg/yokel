@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="detail-nav-bar" @handleNavBarItemClick="handleNavBarItemClick" />
-    <scroll class="detail-scroll" ref="scrollRef">
+    <detail-nav-bar class="detail-nav-bar" @handleNavBarItemClick="handleNavBarItemClick" ref="navBar" />
+    <scroll class="detail-scroll" ref="scrollRef" :probeType="3" @handleBetterScrollScroll="handleBetterScrollScroll">
       <detail-swiper :detailBannerList="detailBannerList" />
       <div class="detail-wares-related">
         <detail-wares-related :detailWaresInfo="detailWaresInfo" />
@@ -77,7 +77,8 @@ export default {
       commentInfo: {},
       goodsList: [],
       themeTopYs: [],
-      getThemeTopYs: null
+      getThemeTopYs: null,
+      currIndex: 0
     }
   },
   components: {
@@ -153,6 +154,17 @@ export default {
     // 获取点击navbar对应的值
     handleNavBarItemClick (index) {
       this.$refs.scrollRef.scrollBack(0, -this.themeTopYs[index], 500)
+    },
+    // 滚动better-scroll时改变对应的navBar中的index
+    handleBetterScrollScroll (position) {
+      const Length = this.themeTopYs.length
+      const positionY = -position.y
+      for (let i = 0; i < Length; i++) {
+        if (this.currIndex !== i && ((i < Length && positionY >= this.themeTopYs[i] && positionY < this.themeTopYs[i + 1]) || (i === Length - 1 && positionY >= this.themeTopYs[i]))) {
+          this.currIndex = i
+          this.$refs.navBar.curIndex = this.currIndex
+        }
+      }
     }
   }
 }
