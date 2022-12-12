@@ -58,3 +58,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+  .wrapper {
+    overflow: hidden;
+  }
+</style>

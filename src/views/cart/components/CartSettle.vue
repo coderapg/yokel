@@ -43,8 +43,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 46px;
-    padding: 10px  9px 10px 16px;
+    height: 66px;
+    padding: 0px  9px 0px 16px;
     background-color: #fff;
     .cart-checked-all {
       display: flex;

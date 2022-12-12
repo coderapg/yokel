@@ -25,6 +25,10 @@ export default {
 
 <style lang="less" scoped>
   .nav-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     display: flex;
     height: 44px;
     line-height: 44px;
@@ -33,6 +37,7 @@ export default {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.06);
     font-size: 16px;
     box-sizing: border-box;
+    z-index: 999;
     .left, .right {
       width: 60px;
     }

@@ -33,14 +33,11 @@ export default {
 
 <style lang="less" scoped>
   .cart-nav-bar {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    background-color: #f8f8f8;
     width: 100vw;
     height: 44px;
+    .nav-bar {
+      background-color: #f8f8f8;
+    }
     p {
       margin: 0;
     }
