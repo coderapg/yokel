@@ -13,7 +13,7 @@
       <goods-list :goodsList="goodsList" ref="goodsList" />
     </scroll>
     <back-top @click.native="handleBackTopClick" v-show="isShowBackTop" />
-    <detail-tool-bar />
+    <detail-tool-bar @handleToAddCart="handleToAddCart" />
   </div>
 </template>
 
@@ -149,6 +149,9 @@ export default {
           this.$refs.navBar.curIndex = this.currIndex
         }
       }
+    },
+    handleToAddCart () {
+      console.log('加入购物车', this.detailWaresInfo, this.sellerInfo)
     }
   }
 }

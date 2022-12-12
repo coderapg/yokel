@@ -36,7 +36,7 @@ export default {
       alert('点击收藏')
     },
     handleToAddCart () {
-      alert('点击加入购物车')
+      this.$emit('handleToAddCart')
     },
     handleToBuyNow () {
       alert('点击立即购买')

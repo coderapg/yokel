@@ -38,6 +38,9 @@ export default {
     }
     .center {
       flex: 1;
+      div {
+        margin: 0;
+      }
     }
   }
 </style>
