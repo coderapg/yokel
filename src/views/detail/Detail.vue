@@ -31,7 +31,7 @@ import DetailParamInfo from './components/DetailParamInfo'
 import DetailCommentsRate from './components/DetailCommentsRate'
 import DetailToolBar from './components/DetailToolBar'
 
-import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
+import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities, ShopOrderItem } from 'https/detail'
 import { imgRefreshLoadMixin, backTopMixin } from 'common/mixin'
 import { debounce } from 'common/utils'
 
@@ -151,7 +151,9 @@ export default {
       }
     },
     handleToAddCart () {
-      console.log('加入购物车', this.detailWaresInfo, this.sellerInfo)
+      // console.log('加入购物车', this.detailWaresInfo, this.sellerInfo)
+      const shopObj = new ShopOrderItem(this.detailWaresInfo, this.sellerInfo)
+      console.log('shopObj===', shopObj)
     }
   }
 }

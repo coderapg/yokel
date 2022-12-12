@@ -62,3 +62,22 @@ export function recommendingCommodities (iid) {
     }
   })
 }
+
+// 抽取数据-添加到store中的数据
+export class ShopOrderItem {
+  constructor (detailWaresInfo, sellerInfo) {
+    this.desc = detailWaresInfo.desc
+    this.newPrice = detailWaresInfo.newPrice
+    this.oldPrice = detailWaresInfo.oldPrice
+    this.realPrice = detailWaresInfo.realPrice
+    this.services = detailWaresInfo.services
+    this.title = detailWaresInfo.title
+    this.allGoodsUrl = sellerInfo.allGoodsUrl
+    this.idx = sellerInfo.idx
+    this.name = sellerInfo.name
+    this.shopId = sellerInfo.shopId
+    this.shopLogo = sellerInfo.shopLogo
+    this.shopUrl = sellerInfo.shopUrl
+    this.userId = sellerInfo.userId
+  }
+}
