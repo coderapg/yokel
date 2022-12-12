@@ -65,12 +65,12 @@ export function recommendingCommodities (iid) {
 
 // 抽取数据-添加到store中的数据
 export class ShopOrderItem {
-  constructor (detailWaresInfo, sellerInfo) {
+  constructor (detailWaresInfo, sellerInfo, goodsInfo) {
     this.desc = detailWaresInfo.desc
     this.newPrice = detailWaresInfo.newPrice
     this.oldPrice = detailWaresInfo.oldPrice
     this.realPrice = detailWaresInfo.realPrice
-    this.services = detailWaresInfo.services
+    this.servicesArr = detailWaresInfo.services && detailWaresInfo.services.length > 0 ? detailWaresInfo.services.map(item => item.name) : []
     this.title = detailWaresInfo.title
     this.allGoodsUrl = sellerInfo.allGoodsUrl
     this.idx = sellerInfo.idx
@@ -79,5 +79,6 @@ export class ShopOrderItem {
     this.shopLogo = sellerInfo.shopLogo
     this.shopUrl = sellerInfo.shopUrl
     this.userId = sellerInfo.userId
+    this.wearImg = goodsInfo.detailImage[0].list[0]
   }
 }

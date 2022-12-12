@@ -31,7 +31,7 @@ import DetailParamInfo from './components/DetailParamInfo'
 import DetailCommentsRate from './components/DetailCommentsRate'
 import DetailToolBar from './components/DetailToolBar'
 
-import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities } from 'https/detail'
+import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities, ShopOrderItem } from 'https/detail'
 import { imgRefreshLoadMixin, backTopMixin } from 'common/mixin'
 import { debounce } from 'common/utils'
 import { ADD_CART } from '@/store/mutations-type'
@@ -152,11 +152,7 @@ export default {
       }
     },
     handleToAddCart () {
-      // const shopObj = new ShopOrderItem(this.detailWaresInfo, this.sellerInfo)
-      const { desc, realPrice, services, title } = this.detailWaresInfo
-      const { allGoodsUrl, idx, name, shopId, shopLogo, shopUrl, userId } = this.sellerInfo
-      const servicesArr = services && services.length > 0 ? services.map(item => item.name) : []
-      const shopObj = { desc, realPrice, servicesArr, title, allGoodsUrl, idx, name, shopId, shopLogo, shopUrl, userId }
+      const shopObj = new ShopOrderItem(this.detailWaresInfo, this.sellerInfo, this.goodsInfo)
       this.$store.commit(ADD_CART, { data: shopObj })
     }
   }

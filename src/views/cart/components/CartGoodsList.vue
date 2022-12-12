@@ -1,6 +1,6 @@
 <template>
   <div class="cart-goods-list">
-    <div class="goods-list-item">
+    <div class="goods-list-item" v-for="(item, index) in cartList" :key="index">
       <div class="item-head">
         <div class="item-head-left">
           <div class="item-head-checked-icon">
@@ -13,7 +13,7 @@
               <i class="iconfont">
                 <img src="~assets/images/cart/tianmao.png" alt="">
               </i>
-              <p>美中购物车</p>
+              <p>{{ item.name }}</p>
               <em class="iconfont"> > </em>
             </div>
             <div class="head-draw-coupon">领券</div>
@@ -36,86 +36,22 @@
         <div class="item-content-right">
           <div class="item-content-message">
             <div class="item-content-img">
-              <img src="https://img.alicdn.com/bao/uploaded/i1/78258391/O1CN01n6iLcr2Br87S6i2Qg_!!78258391.jpg_80x80.jpg" alt="">
+              <img :src="item.wearImg" alt="">
             </div>
             <div class="item-head-info">
               <div class="item-info-title">
-                <p>THE NORTH FACE北面96男士户外休闲美版拉链羽绒背心保暖蓬松700</p>
+                <p>{{ item.title }}</p>
               </div>
               <div class="item-info-mode">
-                <span class="item-info-mode-desc">蓝+黑 NF0A3JQQD7R尺码：美码 XL（国内现货）</span>
+                <span class="item-info-mode-desc">{{ item.desc }}</span>
                 <i class="iconfont"> > </i>
               </div>
               <div class="item-info-descount">
-                <span>每200减30</span>
-                <span>库存紧张</span>
+                <span v-for="(key, indey) in item.servicesArr" :key="indey">{{ key }}</span>
               </div>
               <div class="item-info-price">
-                <span class="info-now-price"><em>¥</em>1188.15</span>
-                <span class="info-now-num">X 1 </span>
-              </div>
-            </div>
-          </div>
-          <div class="item-content-shaky">
-            <p class="shaky"><em>本店活动</em>直降除外，满199元，享包邮</p>
-            <p class="cou">凑单 ></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="goods-list-item">
-      <div class="item-head">
-        <div class="item-head-left">
-          <div class="item-head-checked-icon">
-            <div :class="isChecked ? 'item-head-check-checked' : 'item-head-check'" @click="handleItemClick"></div>
-          </div>
-        </div>
-        <div class="item-head-right">
-          <div class="item-head-title">
-            <div class="head-title">
-              <i class="iconfont">
-                <img src="~assets/images/cart/tianmao.png" alt="">
-              </i>
-              <p>美中购物车</p>
-              <em class="iconfont"> > </em>
-            </div>
-            <div class="head-draw-coupon">领券</div>
-          </div>
-          <div class="item-head-desc">
-            <div class="desc-across">
-              <span class="item-reduction">跨店减免</span>
-              <span class="man-jian">每满200减30,可跨店</span>
-            </div>
-            <span class="cou-dan">凑单<em> > </em></span>
-          </div>
-        </div>
-      </div>
-      <div class="item-content">
-        <div class="item-head-left">
-          <div class="item-head-checked-icon">
-            <div :class="isChecked ? 'item-head-check-checked' : 'item-head-check'" @click="handleItemClick"></div>
-          </div>
-        </div>
-        <div class="item-content-right">
-          <div class="item-content-message">
-            <div class="item-content-img">
-              <img src="https://img.alicdn.com/bao/uploaded/i1/78258391/O1CN01n6iLcr2Br87S6i2Qg_!!78258391.jpg_80x80.jpg" alt="">
-            </div>
-            <div class="item-head-info">
-              <div class="item-info-title">
-                <p>THE NORTH FACE北面96男士户外休闲美版拉链羽绒背心保暖蓬松700</p>
-              </div>
-              <div class="item-info-mode">
-                <span class="item-info-mode-desc">蓝+黑 NF0A3JQQD7R尺码：美码 XL（国内现货）</span>
-                <i class="iconfont"> > </i>
-              </div>
-              <div class="item-info-descount">
-                <span>每200减30</span>
-                <span>库存紧张</span>
-              </div>
-              <div class="item-info-price">
-                <span class="info-now-price"><em>¥</em>1188.15</span>
-                <span class="info-now-num">X 1 </span>
+                <span class="info-now-price"><em>¥</em>{{ item.realPrice }}</span>
+                <span class="info-now-num">X {{ item.counter }} </span>
               </div>
             </div>
           </div>
@@ -136,6 +72,15 @@ export default {
   data () {
     return {
       isChecked: false
+    }
+  },
+  props: {
+    cartList: {
+      type: Array,
+      default () {
+        return []
+      },
+      required: true
     }
   },
   components: {
@@ -245,8 +190,8 @@ export default {
               overflow: hidden;
               margin-right: 12px;
               img {
-                width: 100%;
-                height: 100%;
+                width: 100px;
+                height: 100px;
               }
             }
             .item-head-info {

@@ -3,7 +3,7 @@
     <cart-nav-bar />
     <scroll class="cart-scroll" ref="scrollRef">
       <div class="scroll-content">
-        <cart-goods-list />
+        <cart-goods-list :cartList="cartList" />
       </div>
     </scroll>
     <cart-settle />
@@ -17,6 +17,8 @@ import CartNavBar from './components/CartNavBar'
 import CartGoodsList from './components/CartGoodsList'
 import CartSettle from './components/CartSettle'
 
+import { mapState } from 'vuex'
+
 export default {
   name: 'Cart',
   data () {
@@ -27,7 +29,15 @@ export default {
     Scroll,
     CartGoodsList,
     CartSettle
+  },
+  computed: {
+    ...mapState({
+      cartList: state => state.cartList
+    })
   }
+  // mounted () {
+  //   console.log('打印mustation', mapState, this.cartList)
+  // }
 }
 </script>
 
