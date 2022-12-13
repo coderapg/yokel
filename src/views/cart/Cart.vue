@@ -34,10 +34,10 @@ export default {
     ...mapState({
       cartList: state => state.cartList
     })
+  },
+  activated () {
+    this.$refs.scrollRef.upDataRefresh()
   }
-  // mounted () {
-  //   console.log('打印mustation', mapState, this.cartList)
-  // }
 }
 </script>
 
