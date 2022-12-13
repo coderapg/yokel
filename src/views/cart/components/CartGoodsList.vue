@@ -51,7 +51,7 @@
               </div>
               <div class="item-info-price">
                 <span class="info-now-price"><em>¥</em>{{ item.realPrice }}</span>
-                <span class="info-now-num">X {{ item.counter }} </span>
+                <span class="info-now-num">X {{ item.count }} </span>
               </div>
             </div>
           </div>

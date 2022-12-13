@@ -34,7 +34,7 @@ import DetailToolBar from './components/DetailToolBar'
 import { getDetailMultidata, WaresInfo, SellerInfo, GoodsParam, recommendingCommodities, ShopOrderItem } from 'https/detail'
 import { imgRefreshLoadMixin, backTopMixin } from 'common/mixin'
 import { debounce } from 'common/utils'
-import { ADD_CART } from '@/store/mutations-type'
+import { DISPATCH_CART } from '@/store/mutations-type'
 
 export default {
   name: 'Detail',
@@ -153,7 +153,7 @@ export default {
     },
     handleToAddCart () {
       const shopObj = new ShopOrderItem(this.detailWaresInfo, this.sellerInfo, this.goodsInfo)
-      this.$store.commit(ADD_CART, { data: shopObj })
+      this.$store.dispatch(DISPATCH_CART, shopObj)
     }
   }
 }
