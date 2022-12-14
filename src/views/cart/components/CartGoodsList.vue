@@ -23,8 +23,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less" scoped>
-  // .cart-goods-list {
-  // }
-</style>

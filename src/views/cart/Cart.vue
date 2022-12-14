@@ -21,9 +21,6 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Cart',
-  data () {
-    return {}
-  },
   components: {
     CartNavBar,
     Scroll,

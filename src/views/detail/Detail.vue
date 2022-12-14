@@ -12,6 +12,7 @@
       <detail-comments-rate :commentInfo="commentInfo" ref="commentInfo" />
       <goods-list :goodsList="goodsList" ref="goodsList" />
     </scroll>
+    <toast :message="message" :isShow="isShow" />
     <back-top @click.native="handleBackTopClick" v-show="isShowBackTop" />
     <detail-tool-bar @handleToAddCart="handleToAddCart" />
   </div>
@@ -21,6 +22,7 @@
 import Scroll from 'components/common/Scroll/Scroll'
 import GoodsList from 'components/content/GoodsList/GoodsList'
 import BackTop from 'components/content/BackTop/BackTop'
+import Toast from 'components/common/Toast/Toast'
 
 import DetailNavBar from './components/DetailNavBar'
 import DetailSwiper from './components/DetailSwiper'
@@ -51,7 +53,9 @@ export default {
       goodsList: [],
       themeTopYs: [],
       getThemeTopYs: null,
-      currIndex: 0
+      currIndex: 0,
+      message: '',
+      isShow: false
     }
   },
   components: {
@@ -65,7 +69,8 @@ export default {
     DetailCommentsRate,
     GoodsList,
     BackTop,
-    DetailToolBar
+    DetailToolBar,
+    Toast
   },
   created () {
     // 保存传入的iid
@@ -152,8 +157,18 @@ export default {
       }
     },
     handleToAddCart () {
+      this.message = '添加成功'
+      this.isShow = true
       const shopObj = new ShopOrderItem(this.detailWaresInfo, this.sellerInfo, this.goodsInfo)
-      this.$store.dispatch(DISPATCH_CART, shopObj)
+      this.$store.dispatch(DISPATCH_CART, {
+        data: shopObj,
+        callback: () => {
+          setTimeout(() => {
+            this.isShow = false
+            this.message = ''
+          }, 1000)
+        }
+      })
     }
   }
 }
