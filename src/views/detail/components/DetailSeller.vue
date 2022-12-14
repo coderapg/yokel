@@ -2,7 +2,7 @@
   <div class="detail-seller bor-rad12">
     <div class="seller-top">
       <div class="seller-top-logo">
-        <img :src="sellerInfo.shopLogo" alt="">
+        <img v-lazy="sellerInfo.shopLogo" alt="">
       </div>
       <div class="seller-top-info">
         <div class="seller-top-title">{{ sellerInfo.name }}</div>

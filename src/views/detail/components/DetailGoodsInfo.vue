@@ -8,8 +8,8 @@
       <img
         v-for="(item, index) in goodsInfo.detailImage[0].list"
         :key="index"
-        :src="item"
-        alt="goods-img"
+        v-lazy="item"
+        alt=""
         @load="goodsInfoImgLoad">
     </div>
     <div></div>

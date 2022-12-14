@@ -35,7 +35,7 @@
       <div class="item-content-right">
         <div class="item-content-message">
           <div class="item-content-img">
-            <img :src="goodsItem.wearImg" alt="">
+            <img v-lazy="goodsItem.wearImg" alt="">
           </div>
           <div class="item-head-info">
             <div class="item-info-title">

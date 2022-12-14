@@ -13,7 +13,7 @@
       </tr>
     </table>
     <div class="info-img" v-if="paramInfo.image.length !== 0">
-      <img :src="paramInfo.image" alt="">
+      <img v-lazy="paramInfo.image" alt="">
     </div>
   </div>
 </template>

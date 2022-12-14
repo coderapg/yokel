@@ -1,7 +1,7 @@
 <template>
   <div class="goods-list-item">
     <a href="javascript:;" @click="handleGoodsListItemClick">
-      <img :src="showImg" alt="" @load="handleGoodsListItemImageLoad">
+      <img v-lazy="showImg" alt="" @load="handleGoodsListItemImageLoad">
       <div class="item-desc">
         <p class="item-title">{{ listItem.title }}</p>
         <div class="item-info">
