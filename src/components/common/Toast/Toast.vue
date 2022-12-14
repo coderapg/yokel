@@ -15,6 +15,16 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  methods: {
+    showMessage (message = '默认文字', duration = 2000) {
+      this.isShow = true
+      this.message = message
+      setTimeout(() => {
+        this.isShow = false
+        this.message = ''
+      }, duration)
+    }
   }
 }
 </script>
@@ -24,6 +34,7 @@ export default {
     position: fixed;
     left: 50%;
     top: 50%;
+    z-index: 999;
     transform:translate(-50%, -50%);
     padding: 6px 10px;
     color: #fff;
