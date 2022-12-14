@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import fastClick from 'fastclick'
 
 import toast from 'components/common/Toast'
 
@@ -11,6 +12,8 @@ import 'normalize.css/normalize.css'
 Vue.config.productionTip = false
 
 Vue.use(toast)
+
+fastClick.attach(document.body)
 
 Vue.prototype.$EventBus = new Vue()
 
