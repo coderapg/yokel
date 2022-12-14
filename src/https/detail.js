@@ -80,5 +80,6 @@ export class ShopOrderItem {
     this.shopUrl = sellerInfo.shopUrl
     this.userId = sellerInfo.userId
     this.wearImg = goodsInfo.detailImage[0].list[0]
+    this.isChecked = true
   }
 }

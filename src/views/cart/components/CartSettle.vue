@@ -7,7 +7,7 @@
       <div class="cart-all-price">
         <span class="cart-title">合计:</span>
         <span class="cart-money">
-          <em>¥</em>244.88
+          <em>¥</em>{{ getTotal }}
         </span>
       </div>
       <div class="cart-total">
@@ -18,12 +18,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 
 export default {
   name: 'CartSettle',
   data () {
     return {
       isChecked: false
+    }
+  },
+  computed: {
+    ...mapState({
+      cartList: state => state.cartList
+    }),
+    getTotal () {
+      return (this.cartList.filter(item => item.isChecked).reduce((preVal, nextVal) => preVal + (nextVal.realPrice * nextVal.count), 0)).toFixed(2)
     }
   },
   methods: {
